@@ -238,8 +238,103 @@ public class mybinarytree{
         printleafnode(node.left);
         printleafnode(node.right);
     }
-        
+    
+    
+    //Level-Order Traversal==================================
+    public static void levelOrder_01(Node root)
+    {
+        LinkedList<Node> ll = new LinkedList<>();
 
+        ll.addLast(root);
+
+        while(ll.size() > 0)
+        {
+            Node curr = ll.get(0);
+            System.out.print(curr.data + " ");
+            if(curr.left != null)
+            {
+                ll.addLast(curr.left);
+            }
+            if(curr.right != null)
+            {
+                ll.addLast(curr.right);
+            }
+            ll.removeFirst();
+        }
+    }
+
+    //line-wise ===========
+
+    //count method
+    public static void levelOrder_02(Node root)
+    {
+        LinkedList<Node> ll = new LinkedList<>();
+        ll.addLast(root);
+        while(!ll.isEmpty())
+        {
+            int c = ll.size();
+            while(c > 0)
+            {
+                Node curr = ll.get(0);
+                ll.removeFirst();
+                System.out.print(curr.data + " ");
+                if(curr.left != null)
+                {
+                    ll.addLast(curr.left);
+                }
+                if(curr.right != null)
+                {
+                    ll.addLast(curr.right);
+                }
+                c--;
+            }
+            System.out.println();
+        }
+    }
+
+    // 2 queue method
+    public static void levelOrder_03(Node root)
+    {
+        LinkedList<Node> q1 = new LinkedList<>();
+        LinkedList<Node> q2 = new LinkedList<>();
+        q1.addLast(root);
+        while(!q1.isEmpty() || !q2.isEmpty())
+        {
+            while(!q1.isEmpty())
+            {
+                Node curr = q1.removeFirst();
+                System.out.print(curr.data + " ");
+                if(curr.left != null)
+                {
+                    q2.addLast(curr.left);
+                }
+                if(curr.right != null)
+                {
+                    q2.addLast(curr.right);
+                }
+            }
+            System.out.println();
+            LinkedList<Node> t = new LinkedList<>();
+            t = q1;
+            q1 = q2;
+            q2 = t;
+        }
+    }
+
+
+    // ZigZag Order Traversal
+    public static void zigzagtraversal(Node root)
+    {
+        LinkedList<Node> q1 = new LinkedList<>() , q2 = new LinkedList<>();
+        q1.addLast(root);
+        while(!q1.isEmpty() || !q2.isEmpty())
+        {
+            (!q1.isEmpty())
+            {
+                Node curr = q1
+            }
+        }
+    }
 
     public static void main(String[] args)
     {
@@ -260,7 +355,8 @@ public class mybinarytree{
             //         System.out.println(n.data);
             //     }
             
-            printleafnode(root);
+        //    printleafnode(root);
+        levelOrder_03(root);
     
     }
 }

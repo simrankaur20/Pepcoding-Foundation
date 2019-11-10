@@ -11,7 +11,7 @@ class array2d{
             {
                 System.out.print( y + " ");
             }
-            System.out.println();
+            System.out.println(a);
         }
     }
 }

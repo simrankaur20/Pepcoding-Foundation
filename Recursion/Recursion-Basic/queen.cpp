@@ -111,11 +111,20 @@ int queen_comb_subsq(vector<vector<bool>> & boxes, int qpsf,int tq,int idx, stri
     return count;
 }
 
+//N Queen bits
+
+
+
+
+
 void queencombbase()
 {
     vector<vector<bool>> boxes(4,vector<bool>(4,false));
     cout << queen_comb_subsq(boxes,0,4,0,"");
 }
+
+
+
 int main()
 {
     queencombbase();
