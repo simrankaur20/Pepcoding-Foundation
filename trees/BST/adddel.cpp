@@ -12,6 +12,7 @@ class TreeNode{
         right = NULL;
     }
 };
+
 TreeNode* addnode(TreeNode * root , int data)
 {
     if(root == NULL)
@@ -42,8 +43,7 @@ void add(TreeNode * node, TreeNode * par, int data , bool isleft)
         {
             par->right = new TreeNode(data);
         }
-        return ;
-        
+        return ;  
     }
 
     if(node->data < data)
@@ -69,6 +69,88 @@ void display(TreeNode * root)
     display(root->left);
     display(root->right);
 }
+
+TreeNode* lkarm(TreeNode * r)
+{
+    TreeNode * p = r;
+    r = r->left;
+    while(r->right != NULL)
+    {
+        p = r;
+        r = r->right;
+    }
+   // p->right = NULL;
+    return r;
+}
+
+TreeNode * deletenode(TreeNode * root, int data)
+{
+    if(root == NULL)
+    {
+        return NULL;
+    }
+    if(root->data == data){
+        if( !root->left  && !root->right)
+        {
+            delete root;
+            return NULL;
+        }
+
+        if((root->left && !root->right) || (!root->left && root->right))
+        {
+            return root->left == NULL ? root->right : root->left;
+        }
+
+        else
+        {
+            TreeNode* n = lkarm(root);
+            root->data = n->data;
+            root->left = deletenode(root->left, n->data);
+            return root;
+        }
+    }
+    else if(root->data < data)
+    {
+        root->right = deletenode(root->right , data);
+    }
+    else
+    {
+        root->left = deletenode(root->left, data);
+    }
+    return root;
+    
+}
+bool find(TreeNode * r,int data)
+{
+    if(!r) return false;
+
+    if(data < r->data)
+    {
+        return find( r->left, data);
+    }
+    else if(data > r->data)
+    {
+        return find( r->right, data);
+    }
+    else
+    {
+        return r->data == data ? true : false;
+    }
+    
+}
+bool targetsum(TreeNode * root, int tar)
+{
+    if(root == NULL)
+    {
+        return false;
+    }
+    int comp = tar - root->data;
+    if(find(root , comp))
+    {
+        return true;
+    } 
+    return false;
+}
 int main()
 {
     TreeNode * root = new TreeNode (5);
@@ -80,5 +162,12 @@ int main()
     add(root,NULL,4,false);
     add(root,NULL,6,false);
     add(root,NULL,2,false);
+    add(root,NULL,1,false);
+    add(root,NULL,10,false);
+    add(root,NULL,8,false);
+    add(root,NULL,9,false);
+    display(root);
+    cout<<"delete"<<endl;
+    root = deletenode(root ,10);
     display(root);
 }
