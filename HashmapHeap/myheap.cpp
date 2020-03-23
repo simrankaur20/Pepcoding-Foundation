@@ -22,6 +22,9 @@ class myheap{
     }
 
     myheap(vector<int> &ar)
+    {
+        
+    }
 
 };
 int main()
